@@ -2,20 +2,25 @@
 
 A simple Python project to generate QR code images from any website URL.
 
+The program asks the user to enter a URL and a QR code file name. After generating the QR code, it automatically opens the saved image file.
+
 ## Features
 
-* Generate QR codes from URLs
-* Save QR code as a PNG image
+* Generate QR codes from website URLs
+* Choose your own QR image file name
+* Save QR codes as PNG images
+* Automatically open the generated QR code image
 * Simple command-line program
 
 ## Requirements
 
 * Python 3.x
-* qrcode library
+* `qrcode` library
+* Pillow library
 
 ## Installation
 
-Install the required library:
+Open the terminal in VS Code and install the required library:
 
 ```bash
 pip install qrcode[pil]
@@ -23,13 +28,15 @@ pip install qrcode[pil]
 
 ## How to Run
 
-Open the project folder in VS Code and run:
+Open the project folder in VS Code.
+
+Run the Python file using:
 
 ```bash
 python "qr generator.py"
 ```
 
-If that does not work, use:
+If that does not work, try:
 
 ```bash
 py "qr generator.py"
@@ -38,20 +45,23 @@ py "qr generator.py"
 ## How to Use
 
 1. Run the program.
-2. Enter a website URL.
-3. The QR code image will be generated.
-4. Open the generated `qr.png` file.
+2. Enter the website URL you want to convert into a QR code.
+3. Enter a file name for the QR image.
+4. Make sure to add `.png` at the end of the file name.
+5. The QR code will be saved in the project folder.
+6. The generated QR code image will open automatically.
 
-### Example
+## Example
 
 ```text
-Enter Your URL: https://uniwallets.vercel.app
+Enter Your URL : https://uniwallets.vercel.app
+Enter QR file name : uniwallet.png
 ```
 
-Output file:
+The generated file will be saved as:
 
 ```text
-qr.png
+uniwallet.png
 ```
 
 ## Project Files
@@ -59,8 +69,8 @@ qr.png
 ```text
 QR-Generator/
 ├── qr generator.py
-├── qr.png
-└── README.md
+├── README.md
+└── your-generated-qr.png
 ```
 
 ## Technologies Used
@@ -68,7 +78,20 @@ QR-Generator/
 * Python
 * qrcode
 * Pillow
+* os module
 
-## Author
+## Important Note
 
-Nilusha-RN
+When entering the QR file name, use the `.png` extension.
+
+Example:
+
+```text
+myqrcode.png
+```
+
+Do not enter only:
+
+```text
+myqrcode
+```
