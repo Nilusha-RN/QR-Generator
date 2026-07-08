@@ -19,7 +19,7 @@ if not file_name:
 if not file_name.endswith(".png"):
     file_name += ".png"
 
-folder_path = "F:\Bussiness\Project\QR\QR python"
+folder_path ="F:\\Bussiness\\Project\\QR\\QR python"
 file_path = os.path.join(folder_path, file_name)
 
 version = int(input("Enter QR Version (1-40) [Recommended: 1-5]: "))
@@ -33,7 +33,13 @@ qr = qrcode.QRCode(
 )
 qr.add_data(url)
 
-img = qr.make_image()
+fill = input("QR Color: ")
+back = input("Background Color: ")
+
+img = qr.make_image(
+    fill_color=fill,
+    back_color=back
+)
 img.save(file_path)
 
 os.startfile(file_path)  
