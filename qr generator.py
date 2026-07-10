@@ -1,5 +1,6 @@
 import qrcode
 import os
+from datetime import datetime
 
 url = input("Enter URL: ").strip()
 
@@ -42,4 +43,16 @@ img = qr.make_image(
 )
 img.save(file_path)
 
+with open("history.txt", "a") as file:
+    file.write(
+        f"{datetime.now():%Y-%m-%d %H:%M:%S} | {url} | {file_name}\n"
+    )
+
+print("\n========== QR History ==========")
+
+if os.path.exists("history.txt"):
+    with open("history.txt", "r") as file:
+        print(file.read())
+
 os.startfile(file_path)  
+
