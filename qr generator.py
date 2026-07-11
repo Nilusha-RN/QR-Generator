@@ -2,6 +2,10 @@ import qrcode
 import os
 from datetime import datetime
 
+print("=" * 35)
+print("      QR Code Generator")
+print("=" * 35)
+
 url = input("Enter URL: ").strip()
 
 if not url:
@@ -20,39 +24,49 @@ if not file_name:
 if not file_name.endswith(".png"):
     file_name += ".png"
 
-folder_path ="F:\\Bussiness\\Project\\QR\\QR python"
+folder_path = "output"
+os.makedirs(folder_path, exist_ok=True)
+
 file_path = os.path.join(folder_path, file_name)
 
 version = int(input("Enter QR Version (1-40) [Recommended: 1-5]: "))
 box_size = int(input("Enter Box Size [Recommended: 8-12]: "))
 border = int(input("Enter Border Size [Recommended: 2-4]: "))
 
-qr = qrcode.QRCode(
-    version=version,
-    box_size=box_size,
-    border=border
-)
-qr.add_data(url)
-
 fill = input("QR Color: ")
 back = input("Background Color: ")
 
-img = qr.make_image(
-    fill_color=fill,
-    back_color=back
-)
-img.save(file_path)
-
-with open("history.txt", "a") as file:
-    file.write(
-        f"{datetime.now():%Y-%m-%d %H:%M:%S} | {url} | {file_name}\n"
+try:
+    qr = qrcode.QRCode(
+        version=version,
+        box_size=box_size,
+        border=border
     )
 
-print("\n========== QR History ==========")
+    qr.add_data(url)
+    qr.make(fit=True)
 
-if os.path.exists("history.txt"):
+    img = qr.make_image(
+        fill_color=fill,
+        back_color=back
+    )
+
+    img.save(file_path)
+
+    with open("history.txt", "a") as file:
+        file.write(
+            f"{datetime.now():%Y-%m-%d %H:%M:%S} | {url} | {file_name}\n"
+        )
+
+    print("\nQR Code generated successfully!")
+    print(f"Saved to: {file_path}")
+
+    print("\n========== QR History ==========")
+
     with open("history.txt", "r") as file:
         print(file.read())
 
-os.startfile(file_path)  
+    os.startfile(file_path)
 
+except Exception as e:
+    print(f"\nError: {e}")  
